@@ -1,23 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Header from "./components/Header";
+import InputCard from "./components/InputCard";
+import SummaryBox from "./components/SummaryBox";
+import { useContext } from "react";
+import { ShoppingListContext } from "./contexts/ShoppingListContext";
+import { nanoid } from "nanoid";
 
 function App() {
+  const {
+    shoppingListItems,
+    addItemToList,
+    itemsCount,
+    message,
+    clearShoppingList,
+  } = useContext(ShoppingListContext);
+
+  const item = {
+    id: nanoid(),
+    name: "",
+    price: "",
+    quantity: 1,
+    unit: "",
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Header />
+
+      {itemsCount === 0 ? null : (
+        <div className="button-container">
+          <button
+            className="btn btn-delete-all"
+            onClick={(e) => clearShoppingList()}
+          >
+            Remove all
+          </button>
+        </div>
+      )}
+      {itemsCount === 0 ? null : <SummaryBox />}
+
+      {shoppingListItems &&
+        shoppingListItems.map((item) => <InputCard key={item.id} {...item} />)}
+      <div className="button-container ">
+        {shoppingListItems.length === 0 ? null : <p>{message}</p>}
+
+        <button className="btn" onClick={() => addItemToList(item)}>
+          {itemsCount === 0 ? "+ Add Items" : "+ Add more"}
+        </button>
+      </div>
     </div>
   );
 }
