@@ -19,7 +19,7 @@ function App() {
     id: nanoid(),
     name: "",
     price: "",
-    quantity: 1,
+    quantity: "",
     unit: "",
   };
 
