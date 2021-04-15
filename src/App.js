@@ -10,7 +10,6 @@ function App() {
   const {
     shoppingListItems,
     addItemToList,
-    itemsCount,
     message,
     clearShoppingList,
   } = useContext(ShoppingListContext);
@@ -22,6 +21,8 @@ function App() {
     quantity: "",
     unit: "",
   };
+
+  const itemsCount = shoppingListItems.length;
 
   return (
     <div className="container">

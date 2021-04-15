@@ -7,14 +7,11 @@ const saveListtoLS = (shoppingListItems) => {
 
 export const getItemsCounts = (shoppingListItems) => {
   saveListtoLS(shoppingListItems);
-  let itemsCount = shoppingListItems.reduce(
-    (total, currItem) => total + currItem.quantity * 1,
-    0
-  );
+
   let allItemsPrice = shoppingListItems
     .reduce((total, currItem) => total + currItem.price * currItem.quantity, 0)
     .toFixed(2);
-  return { itemsCount, allItemsPrice };
+  return { allItemsPrice };
 };
 
 export const ShoppingListReducer = (state, action) => {

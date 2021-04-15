@@ -2,13 +2,13 @@ import React, { useContext } from "react";
 import { ShoppingListContext } from "../contexts/ShoppingListContext";
 
 const SummaryBox = () => {
-  const { itemsCount, allItemsPrice } = useContext(ShoppingListContext);
+  const { shoppingListItems, allItemsPrice } = useContext(ShoppingListContext);
 
   return (
     <div className="summary__box-wrapper">
       <div className="summary__box">
         <h4>Items</h4>
-        <h1>{itemsCount}</h1>
+        <h1>{shoppingListItems.length}</h1>
       </div>
       <div className="summary__box">
         <h4>Cost</h4>
