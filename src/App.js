@@ -45,7 +45,7 @@ function App() {
         {shoppingListItems.length === 0 ? null : <p>{message}</p>}
 
         <button className="btn" onClick={() => addItemToList(item)}>
-          {itemsCount === 0 ? "+ Add Items" : "+ Add more"}
+          {itemsCount === 0 ? "+ Add items to buy" : "+ Add more"}
         </button>
       </div>
     </div>
