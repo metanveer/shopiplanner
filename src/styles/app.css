@@ -1,6 +1,6 @@
 @import-normalize;
 @import "header.css";
-@import "summary-box.css";
+@import "summary.css";
 @import "item-card.css";
 @import "inputs.css";
 @import "buttons.css";
@@ -25,5 +25,6 @@ p {
   height: 100vh;
   margin: 0 auto;
   padding: 0 0;
+  text-align: center;
   background-color: var(--appBackground);
 }
