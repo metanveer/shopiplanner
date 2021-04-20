@@ -1,3 +1,10 @@
+:root {
+  --appBackground: white;
+  --buttonTextColor: black;
+  --buttonBgColor: #ccc;
+  --buttonBgHoverColor: #999;
+}
+
 html {
   font-size: 62.5%;
 }
@@ -5,8 +12,7 @@ html {
 body {
   margin: 0 0;
   box-sizing: border-box;
-  /* background-color: rgb(147, 32, 224); */
-  background-color: rgb(241, 241, 241);
-  font-family: "Oxygen", sans-serif;
+  background-color: var(--appBackground);
+  font-family: "Roboto", sans-serif;
   font-size: 1.6rem;
 }

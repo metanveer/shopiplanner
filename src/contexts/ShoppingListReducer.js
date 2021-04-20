@@ -8,10 +8,16 @@ const saveListtoLS = (shoppingListItems) => {
 export const getItemsCounts = (shoppingListItems) => {
   saveListtoLS(shoppingListItems);
 
-  let allItemsPrice = shoppingListItems
-    .reduce((total, currItem) => total + currItem.price * currItem.quantity, 0)
-    .toFixed(2);
-  return { allItemsPrice };
+  let allItemsPriceEst = shoppingListItems.reduce(
+    (total, currItem) => total + currItem.priceEstimated * currItem.quantity,
+    0
+  );
+
+  let allItemsPriceAct = shoppingListItems.reduce(
+    (total, currItem) => total + currItem.priceActual * currItem.quantity,
+    0
+  );
+  return { allItemsPriceEst, allItemsPriceAct };
 };
 
 export const ShoppingListReducer = (state, action) => {
@@ -30,14 +36,14 @@ export const ShoppingListReducer = (state, action) => {
           ...state,
           ...getItemsCounts(state.shoppingListItems),
           shoppingListItems: [...state.shoppingListItems],
-          message: "Item added to list successfully",
+          message: "Please edit the fields",
         };
       } else {
         return {
           ...state,
           ...getItemsCounts(state.shoppingListItems),
           shoppingListItems: [...state.shoppingListItems],
-          message: "Item added already! Pls edit the fields",
+          message: "Item added already! Please edit the fields",
         };
       }
 
@@ -55,27 +61,99 @@ export const ShoppingListReducer = (state, action) => {
         message: "Item removed",
       };
 
-    case "CHANGE_PRICE":
-      const index = state.shoppingListItems.findIndex(
+    case "CHANGE_PRICE_EST":
+      const indexPriceEst = state.shoppingListItems.findIndex(
         (item) => item.id === action.payload.id
       );
-      state.shoppingListItems[index].price = action.payload.updatedPrice;
+      if (
+        action.payload.updatedPriceEst >= 0 &&
+        action.payload.updatedPriceEst <= 9999
+      ) {
+        state.shoppingListItems[indexPriceEst].priceEstimated =
+          action.payload.updatedPriceEst;
+        return {
+          ...state,
+          ...getItemsCounts(state.shoppingListItems),
+          shoppingListItems: [...state.shoppingListItems],
+          message: "Estimated price added!",
+        };
+      }
+      if (action.payload.updatedPriceEst > 9999) {
+        return {
+          ...state,
+          ...getItemsCounts(state.shoppingListItems),
+          shoppingListItems: [...state.shoppingListItems],
+          message: "Not more than 4 digits!",
+        };
+      }
+
       return {
         ...state,
         ...getItemsCounts(state.shoppingListItems),
         shoppingListItems: [...state.shoppingListItems],
-        message: "Price updated successfully!",
+        message: "Price must be non-negative!",
       };
+
+    case "CHANGE_PRICE_ACT":
+      const indexPriceAct = state.shoppingListItems.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      if (
+        action.payload.updatedPriceAct >= 0 &&
+        action.payload.updatedPriceAct <= 9999
+      ) {
+        state.shoppingListItems[indexPriceAct].priceActual =
+          action.payload.updatedPriceAct;
+        return {
+          ...state,
+          ...getItemsCounts(state.shoppingListItems),
+          shoppingListItems: [...state.shoppingListItems],
+          message: "Actual Price Added!",
+        };
+      }
+
+      if (action.payload.updatedPriceAct > 9999) {
+        return {
+          ...state,
+          ...getItemsCounts(state.shoppingListItems),
+          shoppingListItems: [...state.shoppingListItems],
+          message: "Not more than 4 digits!",
+        };
+      }
+
+      return {
+        ...state,
+        ...getItemsCounts(state.shoppingListItems),
+        shoppingListItems: [...state.shoppingListItems],
+        message: "Price must be non-negative!",
+      };
+
     case "CHANGE_QTY":
       const indexQty = state.shoppingListItems.findIndex(
         (item) => item.id === action.payload.id
       );
-      state.shoppingListItems[indexQty].quantity = action.payload.changedQty;
+      if (action.payload.changedQty >= 0 && action.payload.changedQty <= 99) {
+        state.shoppingListItems[indexQty].quantity = action.payload.changedQty;
+        return {
+          ...state,
+          ...getItemsCounts(state.shoppingListItems),
+          shoppingListItems: [...state.shoppingListItems],
+          message: "Qty updated",
+        };
+      }
+      if (action.payload.changedQty >= 99) {
+        return {
+          ...state,
+          ...getItemsCounts(state.shoppingListItems),
+          shoppingListItems: [...state.shoppingListItems],
+          message: "Maximum allowed qauntity reached!",
+        };
+      }
       return {
         ...state,
         ...getItemsCounts(state.shoppingListItems),
         shoppingListItems: [...state.shoppingListItems],
-        message: "Quantity changed",
+        message: "You know, this doesn't make sense!",
       };
 
     case "CHANGE_NAME":
@@ -100,6 +178,40 @@ export const ShoppingListReducer = (state, action) => {
         ...getItemsCounts(state.shoppingListItems),
         shoppingListItems: [...state.shoppingListItems],
         message: "Unit saved!",
+      };
+
+    case "CHANGE_IS_PURCHASED":
+      const indexIsPurch = state.shoppingListItems.findIndex(
+        (item) => item.id === action.payload.id
+      );
+
+      if (action.payload.value && state.shoppingListItems[indexIsPurch].name) {
+        state.shoppingListItems[indexIsPurch].isPurchased =
+          action.payload.value;
+        return {
+          ...state,
+          ...getItemsCounts(state.shoppingListItems),
+          shoppingListItems: [...state.shoppingListItems],
+          message: "Marked as purchased",
+        };
+      }
+
+      if (action.payload.value && !state.shoppingListItems[indexIsPurch].name) {
+        state.shoppingListItems[indexIsPurch].isPurchased = !action.payload
+          .value;
+        return {
+          ...state,
+          ...getItemsCounts(state.shoppingListItems),
+          shoppingListItems: [...state.shoppingListItems],
+          message: "Please add a name first!",
+        };
+      }
+      state.shoppingListItems[indexIsPurch].isPurchased = action.payload.value;
+      return {
+        ...state,
+        ...getItemsCounts(state.shoppingListItems),
+        shoppingListItems: [...state.shoppingListItems],
+        message: "Marked as NOT purchased!",
       };
 
     case "CLEAR":

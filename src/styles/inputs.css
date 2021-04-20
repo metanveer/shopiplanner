@@ -1,0 +1,33 @@
+.input {
+  padding: 5px;
+  margin: 3px;
+  font-size: 16px;
+  font-family: inherit;
+  border-width: 1px;
+  border-color: #cccccc;
+  background-color: #fff;
+  color: #000000;
+  border-style: hidden;
+  border-radius: 5px;
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+.input:focus {
+  outline: none;
+}
+
+.input__name {
+  width: 120px;
+}
+.input__price-estimation {
+  width: 50px;
+}
+.input__price-purchased {
+  width: 50px;
+}
+.input__qty {
+  width: 50px;
+}
+.input__unit {
+  width: 50px;
+}

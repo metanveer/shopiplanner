@@ -3,23 +3,6 @@ import { ShoppingListReducer, getItemsCounts } from "./ShoppingListReducer";
 
 export const ShoppingListContext = createContext();
 
-// const sampleItems = [
-//   {
-//     id: 1,
-//     name: "Katla Fish",
-//     price: 25,
-//     unit: "KG",
-//     quantity: 4,
-//   },
-//   {
-//     id: 2,
-//     name: "Koi Fish",
-//     price: 100,
-//     unit: "KG",
-//     quantity: 2,
-//   },
-// ];
-
 const state = localStorage.getItem("shoppingList")
   ? JSON.parse(localStorage.getItem("shoppingList"))
   : [];
@@ -32,17 +15,46 @@ const initialState = {
 const ShoppingListContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(ShoppingListReducer, initialState);
 
-  const setItemPrice = (updatedPrice, id) => {
-    dispatch({ type: "CHANGE_PRICE", payload: { updatedPrice, id } });
+  const setItemPriceEst = (updatedPriceEst, id) => {
+    dispatch({
+      type: "CHANGE_PRICE_EST",
+      payload: { updatedPriceEst, id },
+    });
   };
+
+  const setItemPriceAct = (updatedPriceAct, id) => {
+    dispatch({
+      type: "CHANGE_PRICE_ACT",
+      payload: { updatedPriceAct, id },
+    });
+  };
+
   const setItemQty = (changedQty, id) => {
-    dispatch({ type: "CHANGE_QTY", payload: { changedQty, id } });
+    dispatch({
+      type: "CHANGE_QTY",
+      payload: { changedQty, id },
+    });
   };
+
   const setItemName = (changedName, id) => {
-    dispatch({ type: "CHANGE_NAME", payload: { changedName, id } });
+    dispatch({
+      type: "CHANGE_NAME",
+      payload: { changedName, id },
+    });
   };
+
   const setItemUnit = (changedUnit, id) => {
-    dispatch({ type: "CHANGE_UNIT", payload: { changedUnit, id } });
+    dispatch({
+      type: "CHANGE_UNIT",
+      payload: { changedUnit, id },
+    });
+  };
+
+  const setItemIsPurchased = (value, id) => {
+    dispatch({
+      type: "CHANGE_IS_PURCHASED",
+      payload: { value, id },
+    });
   };
 
   const addItemToList = (item) => {
@@ -53,20 +65,27 @@ const ShoppingListContextProvider = ({ children }) => {
   };
 
   const removeItem = (id) => {
-    dispatch({ type: "REMOVE_ITEM", payload: id });
+    dispatch({
+      type: "REMOVE_ITEM",
+      payload: id,
+    });
   };
 
   const clearShoppingList = () => {
-    dispatch({ type: "CLEAR" });
+    dispatch({
+      type: "CLEAR",
+    });
   };
 
   const contextValues = {
     removeItem,
     addItemToList,
     setItemName,
-    setItemPrice,
+    setItemPriceEst,
+    setItemPriceAct,
     setItemQty,
     setItemUnit,
+    setItemIsPurchased,
     clearShoppingList,
     ...state,
   };

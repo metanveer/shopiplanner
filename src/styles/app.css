@@ -1,0 +1,29 @@
+@import-normalize;
+@import "header.css";
+@import "summary-box.css";
+@import "item-card.css";
+@import "inputs.css";
+@import "buttons.css";
+
+h1 {
+  margin: 0 0;
+}
+
+h4 {
+  padding: 0;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  min-width: 300px;
+  max-width: 450px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 0 0;
+  background-color: var(--appBackground);
+}

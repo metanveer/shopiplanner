@@ -1,0 +1,111 @@
+.button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  font-family: inherit;
+  font-weight: bold;
+  color: var(--buttonTextColor);
+  font-size: 1.6rem;
+  box-shadow: 0px 0px 20px 0px rgba(126, 123, 123, 0.5);
+  padding: 10px 30px;
+  border-radius: 30px;
+  color: white;
+  background: rgb(124, 2, 224);
+  outline: none;
+  border: none;
+  margin: 10px;
+}
+
+.btn:hover {
+  color: greenyellow;
+  background: black;
+}
+
+.btn--item-card {
+  color: var(--buttonTextColor);
+  font-size: 2rem;
+  height: 3rem;
+  width: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0;
+  border-radius: 1.5rem;
+  background: rgb(124, 2, 224);
+  background: var(--buttonBgColor);
+  outline: none;
+  border: none;
+  margin: 0.5rem;
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
+}
+
+.btn--item-card:hover {
+  background: var(--buttonBgHoverColor);
+}
+.btn--item-card-col-one {
+  color: var(--buttonTextColor);
+  font-size: 2rem;
+  height: 3rem;
+  width: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0;
+  border-radius: 1.5rem;
+  background: var(--buttonBgColor);
+  outline: none;
+  border: none;
+  margin: 0 0 5px 5px;
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
+}
+.btn--item-card-col-one-checked {
+  color: var(--buttonTextColor);
+  font-size: 2rem;
+  height: 3rem;
+  width: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0;
+  border-radius: 1.5rem;
+  background: rgb(16, 214, 16);
+  outline: none;
+  border: none;
+  margin: 0 0 5px 5px;
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
+}
+
+.btn--item-card-col-one:hover {
+  background: var(--buttonBgHoverColor);
+}
+
+.btn-delete {
+  background-color: red;
+  padding: 5px 10px;
+  margin: 0px;
+}
+
+.btn-delete:hover {
+  background: black;
+  color: red;
+}
+
+.btn-delete-all {
+  font-family: inherit;
+  font-weight: bold;
+  background-color: red;
+  padding: 10px 30px;
+  margin: 10px;
+}
+
+.btn-delete-all:hover {
+  background: black;
+  color: red;
+}

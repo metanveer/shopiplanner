@@ -1,6 +1,6 @@
-import "./App.css";
+import "./styles/app.css";
 import Header from "./components/Header";
-import InputCard from "./components/InputCard";
+import ItemCard from "./components/ItemCard";
 import SummaryBox from "./components/SummaryBox";
 import { useContext } from "react";
 import { ShoppingListContext } from "./contexts/ShoppingListContext";
@@ -17,9 +17,12 @@ function App() {
   const item = {
     id: nanoid(),
     name: "",
-    price: "",
+    priceEstimated: "",
+    priceActual: "",
     quantity: "",
     unit: "",
+    isPurchased: false,
+    isCancelled: false,
   };
 
   const itemsCount = shoppingListItems.length;
@@ -41,9 +44,11 @@ function App() {
       {itemsCount === 0 ? null : <SummaryBox />}
 
       {shoppingListItems &&
-        shoppingListItems.map((item) => <InputCard key={item.id} {...item} />)}
+        shoppingListItems.map((item) => <ItemCard key={item.id} {...item} />)}
       <div className="button-container ">
-        {shoppingListItems.length === 0 ? null : <p>{message}</p>}
+        {shoppingListItems.length === 0 ? null : (
+          <p style={{ fontStyle: "italic" }}>{message}</p>
+        )}
 
         <button className="btn" onClick={() => addItemToList(item)}>
           {itemsCount === 0 ? "+ Add items to buy" : "+ Add more"}

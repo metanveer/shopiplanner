@@ -2,17 +2,33 @@ import React, { useContext } from "react";
 import { ShoppingListContext } from "../contexts/ShoppingListContext";
 
 const SummaryBox = () => {
-  const { shoppingListItems, allItemsPrice } = useContext(ShoppingListContext);
+  const { shoppingListItems, allItemsPriceEst, allItemsPriceAct } = useContext(
+    ShoppingListContext
+  );
+
+  const dangerStyle =
+    Number(allItemsPriceAct) > Number(allItemsPriceEst)
+      ? "summary__box summary__box--danger"
+      : "summary__box";
 
   return (
     <div className="summary__box-wrapper">
+      {allItemsPriceAct > 0 ? (
+        <div className={dangerStyle}>
+          <p className="summary__box-text">Act. cost (Tk)</p>
+
+          <h1>{allItemsPriceAct}</h1>
+        </div>
+      ) : (
+        <div className="summary__box">
+          <p className="summary__box-text">Items</p>
+          <h1>{shoppingListItems.length}</h1>
+        </div>
+      )}
+
       <div className="summary__box">
-        <h4>Items</h4>
-        <h1>{shoppingListItems.length}</h1>
-      </div>
-      <div className="summary__box">
-        <h4>Cost</h4>
-        <h1>Tk. {allItemsPrice}</h1>
+        <p className="summary__box-text">Est. cost (Tk)</p>
+        <h1>{allItemsPriceEst}</h1>
       </div>
     </div>
   );
