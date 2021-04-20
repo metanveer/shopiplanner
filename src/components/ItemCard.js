@@ -132,11 +132,12 @@ const ItemCard = ({
               ? `Est. Tk. ${quantity * priceEstimated}`
               : null}
           </div>
-          <div className="item-card__col-two-row-three-coloumns">
-            {quantity * priceActual
-              ? `Act. Tk. ${quantity * priceActual}`
-              : null}
-          </div>
+
+          {quantity * priceActual ? (
+            <div className="item-card__col-two-row-three-coloumns">
+              {`Act. Tk. ${quantity * priceActual}`}
+            </div>
+          ) : null}
         </div>
       </div>
     </div>

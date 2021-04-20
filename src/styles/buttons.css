@@ -25,6 +25,28 @@
   background: black;
 }
 
+@media only screen and (max-width: 500px) {
+  .btn {
+    font-family: inherit;
+    font-weight: bold;
+    color: var(--buttonTextColor);
+    font-size: 1.6rem;
+    box-shadow: 0px 0px 20px 0px rgba(126, 123, 123, 0.5);
+    padding: 10px 30px;
+    border-radius: 30px;
+    color: white;
+    background: rgb(124, 2, 224);
+    outline: none;
+    border: none;
+    margin: 10px;
+  }
+
+  .btn:hover {
+    color: white;
+    background: rgb(124, 2, 224);
+  }
+}
+
 .btn--item-card {
   color: var(--buttonTextColor);
   font-size: 2rem;
@@ -84,17 +106,6 @@
 
 .btn--item-card-col-one:hover {
   background: var(--buttonBgHoverColor);
-}
-
-.btn-delete {
-  background-color: red;
-  padding: 5px 10px;
-  margin: 0px;
-}
-
-.btn-delete:hover {
-  background: black;
-  color: red;
 }
 
 .btn-delete-all {
