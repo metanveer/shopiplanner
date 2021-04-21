@@ -1,65 +1,23 @@
-import "./styles/app.css";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
-import ItemCard from "./components/ItemCard";
-import Summary from "./components/Summary";
-import { useContext } from "react";
-import { ShoppingListContext } from "./contexts/ShoppingListContext";
-import { nanoid } from "nanoid";
-import { AiOutlinePlus } from "react-icons/ai";
-import { MdDeleteForever } from "react-icons/md";
+import About from "./pages/About";
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
+import Save from "./pages/Save";
 
-function App() {
-  const { shoppingListItems, addItemToList, clearShoppingList } = useContext(
-    ShoppingListContext
-  );
-
-  const item = {
-    id: nanoid(),
-    name: "",
-    priceEstimated: "",
-    priceActual: "",
-    quantity: "",
-    unit: "",
-    isPurchased: false,
-    isCancelled: false,
-  };
-
-  const itemsCount = shoppingListItems.length;
-
-  function handleClearShoppingList() {
-    alert("Sure?");
-    clearShoppingList();
-  }
-
+const App = () => {
   return (
-    <div className="container">
+    <Router>
       <Header />
-      {itemsCount === 0 ? null : <Summary />}
-      {itemsCount === 0 ? (
-        <div style={{ fontStyle: "italic" }}>
-          {" "}
-          Create a list and get started!{" "}
-        </div>
-      ) : null}
-      {shoppingListItems &&
-        shoppingListItems.map((item) => <ItemCard key={item.id} {...item} />)}
-      <div className="button-container ">
-        <button className="btn" onClick={() => addItemToList(item)}>
-          <AiOutlinePlus />
-        </button>
-        {itemsCount === 0 ? null : (
-          <div className="button-container">
-            <button
-              className="btn btn-delete-all"
-              onClick={handleClearShoppingList}
-            >
-              <MdDeleteForever />
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
+      <Switch>
+        <Route path="/about" component={About} />
+        <Route path="/save" component={Save} />
+        <Route exact path="/" component={Home} />
+        <Route path="*" component={NotFound} />
+      </Switch>
+    </Router>
   );
-}
+};
 
 export default App;
