@@ -9,8 +9,8 @@ const Report = () => {
   const currentDateTime = Date().toString().substring(0, 25);
   return (
     <div className={cls.card}>
-      <h4>Shopping Report</h4>
-      <p>{currentDateTime} </p>
+      <p className={cls.heading}>Shopping Report</p>
+      <p className={cls.dateTime}>{currentDateTime} </p>
       <div className={cls.itemCard}>
         <ol>
           {shoppingListItems.map((item) =>
