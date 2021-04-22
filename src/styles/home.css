@@ -22,7 +22,6 @@ p {
 .container {
   min-width: 300px;
   max-width: 450px;
-  height: 100vh;
   margin: 0 auto;
   padding: 0 0;
   text-align: center;

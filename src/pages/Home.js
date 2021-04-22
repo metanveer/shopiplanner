@@ -32,7 +32,7 @@ function Home() {
   }
 
   return (
-    <div className="container">
+    <>
       {itemsCount === 0 ? null : <Summary />}
       {itemsCount === 0 ? (
         <div style={{ fontStyle: "italic" }}>
@@ -47,7 +47,7 @@ function Home() {
         </button>
         {itemsCount === 0 ? null : (
           <button className="btn">
-            <Link style={{ color: "white" }} to="/save">
+            <Link style={{ color: "white" }} to="/report">
               <FaRegSave />
             </Link>
           </button>
@@ -64,7 +64,7 @@ function Home() {
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 }
 
