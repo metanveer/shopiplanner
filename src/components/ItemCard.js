@@ -6,6 +6,14 @@ import {
   AiOutlineDelete,
 } from "react-icons/ai";
 import { ShoppingListContext } from "../contexts/ShoppingListContext";
+import {
+  Card,
+  Column,
+  CompareTexts,
+  Input,
+  Row,
+  Button,
+} from "./ItemCard.elements";
 
 const ItemCard = ({
   id,
@@ -42,40 +50,28 @@ const ItemCard = ({
   const modifier = priceActual > priceEstimated ? "danger" : null;
 
   return (
-    <div className={`item-card ${modifier}`}>
-      <div className="item-card__col-one">
-        <div className="icon-not-purchased">
-          <button
-            className={
-              isPurchased
-                ? `btn--item-card-col-one-checked`
-                : "btn--item-card-col-one"
-            }
-            onClick={buttonCheckedHandler}
-          >
-            <AiOutlineCheck />
-          </button>
+    <Card danger={modifier}>
+      <Column fixed>
+        <Button checked={isPurchased} onClick={buttonCheckedHandler}>
+          <AiOutlineCheck />
+        </Button>
 
-          <button
-            className="btn--item-card-col-one"
-            onClick={() => removeItem(id)}
-          >
-            <AiOutlineDelete />
-          </button>
-        </div>
-      </div>
-      <div className="item-card__col-two">
-        <div className="item-card__col-two-row-one">
-          <input
-            className="input input__name"
+        <Button onClick={() => removeItem(id)}>
+          <AiOutlineDelete />
+        </Button>
+      </Column>
+      <Column>
+        <Row>
+          <Input
+            width="135px"
             type="text"
             placeholder="Item name"
             value={name}
-            maxLength="15"
+            maxLength="17"
             onChange={(e) => setItemName(e.target.value, id)}
           />
-          <input
-            className="input input__price-estimation"
+          <Input
+            width="60px"
             type="number"
             min={0}
             max={99999}
@@ -84,8 +80,8 @@ const ItemCard = ({
             onChange={(e) => setItemPriceEst(e.target.value, id)}
           />
           {isPurchased && (
-            <input
-              className="input input__price-purchased"
+            <Input
+              width="60px"
               type="number"
               min={0}
               max={99999}
@@ -94,16 +90,13 @@ const ItemCard = ({
               onChange={(e) => setItemPriceAct(e.target.value, id)}
             />
           )}
-        </div>
-        <div className="item-card__col-two-row-two">
-          <button
-            className="btn--item-card"
-            onClick={() => setItemQty((quantity = quantity * 1 + 1), id)}
-          >
+        </Row>
+        <Row>
+          <Button onClick={() => setItemQty((quantity = quantity * 1 + 1), id)}>
             <AiOutlinePlus />
-          </button>
-          <input
-            className="input input__qty"
+          </Button>
+          <Input
+            width="60px"
             type="number"
             placeholder="Qty"
             min={0}
@@ -111,36 +104,31 @@ const ItemCard = ({
             value={quantity}
             onChange={(e) => setItemQty(e.target.value, id)}
           />
-          <input
-            className="input input__unit"
+          <Input
+            width="60px"
             type="text"
             placeholder="Unit"
             value={unit}
             maxLength="7"
             onChange={(e) => setItemUnit(e.target.value, id)}
           />
-          <button
-            className="btn--item-card"
-            onClick={() => setItemQty((quantity = quantity * 1 - 1), id)}
-          >
+          <Button onClick={() => setItemQty((quantity = quantity * 1 - 1), id)}>
             <AiOutlineMinus />
-          </button>
-        </div>
-        <div className="item-card__col-two-row-three">
-          <div className="item-card__col-two-row-three-coloumns">
+          </Button>
+        </Row>
+        <Row>
+          <CompareTexts>
             {quantity * priceEstimated
               ? `Est. Tk. ${quantity * priceEstimated}`
               : null}
-          </div>
+          </CompareTexts>
 
           {quantity * priceActual ? (
-            <div className="item-card__col-two-row-three-coloumns">
-              {`Act. Tk. ${quantity * priceActual}`}
-            </div>
+            <CompareTexts>{`Act. Tk. ${quantity * priceActual}`}</CompareTexts>
           ) : null}
-        </div>
-      </div>
-    </div>
+        </Row>
+      </Column>
+    </Card>
   );
 };
 

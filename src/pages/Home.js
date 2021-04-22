@@ -1,13 +1,11 @@
-import "../styles/home.css";
 import ItemCard from "../components/ItemCard";
 import Summary from "../components/Summary";
 import { useContext } from "react";
 import { ShoppingListContext } from "../contexts/ShoppingListContext";
 import { nanoid } from "nanoid";
-import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlinePlus, AiOutlineShareAlt } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
-import { FaRegSave } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { CenterButton, StyledLink, Button } from "../GlobalStyles";
 
 function Home() {
   const { shoppingListItems, addItemToList, clearShoppingList } = useContext(
@@ -27,7 +25,6 @@ function Home() {
   const itemsCount = shoppingListItems.length;
 
   function handleClearShoppingList() {
-    alert("Sure?");
     clearShoppingList();
   }
 
@@ -41,29 +38,24 @@ function Home() {
       ) : null}
       {shoppingListItems &&
         shoppingListItems.map((item) => <ItemCard key={item.id} {...item} />)}
-      <div className="button-container ">
-        <button className="btn" onClick={() => addItemToList(item)}>
-          <AiOutlinePlus />
-        </button>
-        {itemsCount === 0 ? null : (
-          <button className="btn">
-            <Link style={{ color: "white" }} to="/report">
-              <FaRegSave />
-            </Link>
-          </button>
-        )}
 
-        {itemsCount === 0 ? null : (
-          <div className="button-container">
-            <button
-              className="btn btn-delete-all"
-              onClick={handleClearShoppingList}
-            >
-              <MdDeleteForever />
-            </button>
-          </div>
+      <CenterButton>
+        <Button onClick={() => addItemToList(item)}>
+          <AiOutlinePlus />
+        </Button>
+        {itemsCount === 0 ? null : !shoppingListItems[0].name ? null : (
+          <Button>
+            <StyledLink to="/report">
+              <AiOutlineShareAlt />
+            </StyledLink>
+          </Button>
         )}
-      </div>
+        {itemsCount === 0 ? null : (
+          <Button danger onClick={handleClearShoppingList}>
+            <MdDeleteForever />
+          </Button>
+        )}
+      </CenterButton>
     </>
   );
 }

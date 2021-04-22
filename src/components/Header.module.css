@@ -1,0 +1,27 @@
+.header {
+  color: rgb(147, 32, 224);
+  background-color: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: ;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 2.8rem;
+  margin-bottom: 0.2rem;
+}
+
+.message {
+  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+  font-style: italic;
+  font-weight: 300;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

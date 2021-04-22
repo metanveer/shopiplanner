@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
+import { AiOutlineRollback } from "react-icons/ai";
 import { ShoppingListContext } from "../contexts/ShoppingListContext";
-import cls from "./Report.module.css";
+import { CenterButton, Button, StyledLink } from "../GlobalStyles";
+import styles from "./Report.module.css";
 
 const Report = () => {
   const { shoppingListItems, allItemsPriceAct } = useContext(
@@ -8,28 +10,37 @@ const Report = () => {
   );
   const currentDateTime = Date().toString().substring(0, 25);
   return (
-    <div className={cls.card}>
-      <p className={cls.heading}>Shopping Report</p>
-      <p className={cls.dateTime}>{currentDateTime} </p>
-      <div className={cls.itemCard}>
-        <ol>
-          {shoppingListItems.map((item) =>
-            item.isPurchased ? (
-              <li>
-                <strong>{item.name}</strong> : {item.quantity} {item.unit} at
-                Tk. {item.priceActual}/{item.unit}. Total Tk.{" "}
-                {item.priceActual * item.quantity}
-              </li>
-            ) : (
-              <li>
-                <strong>{item.name}</strong> : not found/purchased
-              </li>
-            )
-          )}
-        </ol>
+    <>
+      <div className={styles.card}>
+        <p className={styles.heading}>Shopping Report</p>
+        <p className={styles.dateTime}>{currentDateTime} </p>
+        <div className={styles.itemCard}>
+          <ol>
+            {shoppingListItems.map((item) =>
+              item.isPurchased ? (
+                <li key={item.id}>
+                  <strong>{item.name}</strong> : {item.quantity} {item.unit} at
+                  Tk. {item.priceActual}/{item.unit}. Total Tk.{" "}
+                  {item.priceActual * item.quantity}
+                </li>
+              ) : (
+                <li key={item.id}>
+                  <strong>{item.name}</strong> : not found/purchased
+                </li>
+              )
+            )}
+          </ol>
+        </div>
+        <strong>Grand total cost: Tk. {allItemsPriceAct}</strong>
       </div>
-      <strong>Grand total cost: Tk. {allItemsPriceAct}</strong>
-    </div>
+      <CenterButton>
+        <Button>
+          <StyledLink to="/">
+            <AiOutlineRollback />
+          </StyledLink>
+        </Button>
+      </CenterButton>
+    </>
   );
 };
 

@@ -6,6 +6,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import Header from "./components/Header";
+import { Container } from "./GlobalStyles";
 import About from "./pages/About";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
@@ -14,8 +15,9 @@ import Report from "./pages/Report";
 const App = () => {
   return (
     <Router>
-      <div className="container">
+      <Container>
         <Header />
+
         <Switch>
           <Route path="/not-found">
             <NotFound />
@@ -31,7 +33,7 @@ const App = () => {
           </Route>
           <Redirect to="/not-found" />
         </Switch>
-      </div>
+      </Container>
     </Router>
   );
 };

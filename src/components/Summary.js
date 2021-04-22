@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { ShoppingListContext } from "../contexts/ShoppingListContext";
+import { Wrapper, Column, Card, NotifyMsg } from "./Summary.elements";
 
 const Summary = () => {
   const {
@@ -9,37 +10,34 @@ const Summary = () => {
     message,
   } = useContext(ShoppingListContext);
 
-  const dangerStyle =
-    Number(allItemsPriceAct) > Number(allItemsPriceEst)
-      ? "summary__card summary__card--danger"
-      : "summary__card";
+  const dangerStyle = Number(allItemsPriceAct) > Number(allItemsPriceEst);
 
   return (
-    <div className="summary--wrapper ">
+    <Wrapper>
       {!message ? null : (
-        <div className="summary__col">
-          <div className="summary__card--notify">{message}</div>
-        </div>
+        <Column>
+          <NotifyMsg>{message}</NotifyMsg>
+        </Column>
       )}
 
-      <div className="summary__col">
+      <Column>
         {allItemsPriceAct > 0 ? (
-          <div className={dangerStyle}>
-            <p className="summary__card-text">Act. cost (Tk)</p>
+          <Card danger={dangerStyle}>
+            <p>Act. cost (Tk)</p>
             <h1>{allItemsPriceAct}</h1>
-          </div>
+          </Card>
         ) : (
-          <div className="summary__card">
-            <p className="summary__card-text">Items</p>
+          <Card>
+            <p>Items</p>
             <h1>{shoppingListItems.length}</h1>
-          </div>
+          </Card>
         )}
-        <div className="summary__card">
-          <p className="summary__card-text">Est. cost (Tk)</p>
+        <Card>
+          <p>Est. cost (Tk)</p>
           <h1>{allItemsPriceEst}</h1>
-        </div>
-      </div>
-    </div>
+        </Card>
+      </Column>
+    </Wrapper>
   );
 };
 

@@ -1,27 +1,29 @@
-.summary--wrapper {
+import styled from "styled-components";
+
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: sticky;
   top: 0;
   z-index: 2000;
-}
+`;
 
-.summary__col {
+export const Column = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-}
+`;
 
-.summary__card {
+export const Card = styled.div`
   border-radius: 10px 10px 10px 10px;
   border: 0px solid #000000;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
   height: 6rem;
   padding: 0.5rem;
   margin: 0.5rem;
-  background-color: white;
+  background-color: ${({ danger }) => (danger ? "red" : "white")};
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -30,20 +32,11 @@
   flex-grow: 1;
   flex-shrink: 1;
   font-size: 80%;
-}
-.summary__card--notify {
-  background-color: rgb(255, 255, 255);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
+`;
 
-  flex-shrink: 1;
+export const NotifyMsg = styled.div`
+  background-color: rgb(255, 255, 255);
   font-style: italic;
   font-size: 14px;
   color: blue;
-}
-
-.summary__card--danger {
-  background-color: red;
-}
+`;
