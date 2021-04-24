@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { ShoppingListContext } from "../contexts/ShoppingListContext";
-import { Wrapper, Column, Card, NotifyMsg } from "./Summary.elements";
+import styled from "styled-components";
 
 const Summary = () => {
   const {
@@ -40,5 +40,48 @@ const Summary = () => {
     </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+`;
+
+const Column = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Card = styled.div`
+  border-radius: 10px 10px 10px 10px;
+  border: 0px solid #000000;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  height: 6rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  color: ${(p) => p.theme.text};
+  background-color: ${({ danger, theme }) =>
+    danger ? `${theme.danger}` : `${theme.cardBg}`};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-basis: 30rem;
+  flex-grow: 1;
+  flex-shrink: 1;
+  font-size: 80%;
+`;
+
+const NotifyMsg = styled.div`
+  background-color: ${(p) => p.theme.bg};
+  font-style: italic;
+  font-size: 14px;
+  color: ${(p) => p.theme.text};
+`;
 
 export default Summary;

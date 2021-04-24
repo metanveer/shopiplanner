@@ -6,6 +6,7 @@ import { nanoid } from "nanoid";
 import { AiOutlinePlus, AiOutlineShareAlt } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { CenterButton, StyledLink, Button } from "../GlobalStyles";
+import styled from "styled-components";
 
 function Home() {
   const { shoppingListItems, addItemToList, clearShoppingList } = useContext(
@@ -32,9 +33,7 @@ function Home() {
     <>
       {itemsCount === 0 ? null : <Summary />}
       {itemsCount === 0 ? (
-        <div style={{ fontStyle: "italic" }}>
-          Create a list and get started!
-        </div>
+        <BrandingText>Create a list and get started!</BrandingText>
       ) : null}
       {shoppingListItems &&
         shoppingListItems.map((item) => <ItemCard key={item.id} {...item} />)}
@@ -59,5 +58,12 @@ function Home() {
     </>
   );
 }
+
+const BrandingText = styled.p`
+  font-weight: 300;
+  font-size: 1.6rem;
+  font-style: italic;
+  color: ${(p) => p.theme.text};
+`;
 
 export default Home;

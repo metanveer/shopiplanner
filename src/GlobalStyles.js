@@ -9,7 +9,7 @@ html {
 body {
   margin: 0 0;
   box-sizing: border-box;
-  background-color: white;
+  background-color: ${(p) => p.theme.bg};
   font-family: "Roboto", sans-serif;
   font-size: 1.6rem;
 }
@@ -35,7 +35,7 @@ export const Container = styled.div`
 
 export const Button = styled.button`
   font-size: 22px;
-  box-shadow: 0px 0px 20px 0px rgba(126, 123, 123, 0.5);
+  box-shadow: 0px 0px 20px 0px ${(p) => p.theme.bigBtnShadow};
   width: 50px;
   height: 50px;
   display: flex;
@@ -43,22 +43,23 @@ export const Button = styled.button`
   justify-content: center;
   align-items: center;
   border-radius: 25px;
-  color: white;
-  background: ${({ danger }) => (danger ? "red" : "rgb(124, 2, 224)")};
+  color: ${(p) => p.theme.textLight};
+  background: ${({ danger, theme }) =>
+    danger ? `${theme.danger}` : `${theme.primary}`};
   outline: none;
   border: none;
   margin: 5px;
   padding: 0px 0px;
 
   &:hover {
-    color: greenyellow;
-    background: black;
+    color: ${(p) => p.theme.text};
+    background: ${(p) => p.theme.tertiary};
   }
 
   @media only screen and (max-width: 500px) {
     &:hover {
-      color: white;
-      background: rgb(124, 2, 224);
+      color: ${(p) => p.theme.text};
+      background: ${(p) => p.theme.primary};
     }
   }
 
@@ -69,7 +70,7 @@ export const Button = styled.button`
 
 export const StyledLink = styled(Link)`
   font-size: 22px;
-  box-shadow: 0px 0px 20px 0px rgba(126, 123, 123, 0.5);
+  box-shadow: 0px 0px 20px 0px ${(p) => p.theme.bigBtnShadow};
   width: 50px;
   height: 50px;
   display: flex;
@@ -77,7 +78,7 @@ export const StyledLink = styled(Link)`
   justify-content: center;
   align-items: center;
   border-radius: 25px;
-  color: white;
+  color: ${(p) => p.theme.textLight};
 
   outline: none;
   border: none;
@@ -85,8 +86,8 @@ export const StyledLink = styled(Link)`
   padding: 0px 0px;
 
   &:hover {
-    color: greenyellow;
-    background: black;
+    color: ${(p) => p.theme.text};
+    background: ${(p) => p.theme.tertiary};
   }
 
   @media print {
