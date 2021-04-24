@@ -1,9 +1,10 @@
 export const light = {
+  id: "light",
   primary: "#9320E0",
   tertiary: "#53107f",
   danger: "red",
   bg: "white",
-  cardBg: "#eee",
+  cardBg: "#fff",
   text: "black",
   textLight: "white",
   smBtnText: "black",
@@ -14,6 +15,7 @@ export const light = {
 };
 
 export const dark = {
+  id: "dark",
   primary: "#9320E0",
   tertiary: "#53107f",
   danger: "red",
@@ -27,7 +29,3 @@ export const dark = {
   smBtnCheckedBg: "rgb(16, 214, 16)",
   bigBtnShadow: "rgba(126, 123, 123, 0.1)",
 };
-
-const colors = light;
-
-export default colors;

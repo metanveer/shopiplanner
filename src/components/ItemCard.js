@@ -137,7 +137,8 @@ const Card = styled.div`
   flex: 1 1 20rem;
   height: 9rem;
   padding: 0.5rem;
-  margin: 0.5rem;
+  margin: 0.8rem 0.4rem;
+
   background-color: ${(p) =>
     p.danger ? "rgb(225 134 17 / 76%)" : `${p.theme.cardBg}`};
   z-index: ${({ danger }) => (danger ? "999" : "0")};
@@ -145,6 +146,7 @@ const Card = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  transition: all 0.2s linear;
 `;
 
 export const Column = styled.div`

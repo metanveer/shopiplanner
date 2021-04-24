@@ -12,6 +12,7 @@ body {
   background-color: ${(p) => p.theme.bg};
   font-family: "Roboto", sans-serif;
   font-size: 1.6rem;
+  transition: all 0.2s linear;
 }
 
 h1 {

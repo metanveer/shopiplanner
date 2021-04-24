@@ -6,7 +6,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import GlobalStyle from "./GlobalStyles";
-import { light } from "./configs/colors";
+import { light, dark } from "./configs/colors";
 import { ThemeProvider } from "styled-components";
 import CartContextProvider from "./contexts/ShoppingListContext";
 import Header from "./components/Header";
@@ -17,7 +17,9 @@ import NotFound from "./pages/NotFound";
 import Report from "./pages/Report";
 
 const App = () => {
-  const [theme, setTheme] = useState(light);
+  const userTheme = localStorage.getItem("shopilistTheme");
+
+  const [theme, setTheme] = useState(userTheme === "dark" ? dark : light);
 
   return (
     <ThemeProvider theme={{ ...theme, setTheme }}>
@@ -26,7 +28,6 @@ const App = () => {
         <Router>
           <Container>
             <Header />
-
             <Switch>
               <Route path="/not-found">
                 <NotFound />

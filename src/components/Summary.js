@@ -63,7 +63,7 @@ const Card = styled.div`
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
   height: 6rem;
   padding: 0.5rem;
-  margin: 0.5rem;
+  margin: 0 0.4rem;
   color: ${(p) => p.theme.text};
   background-color: ${({ danger, theme }) =>
     danger ? `${theme.danger}` : `${theme.cardBg}`};
@@ -71,10 +71,9 @@ const Card = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  flex-basis: 30rem;
-  flex-grow: 1;
-  flex-shrink: 1;
+  flex: 1 1 30rem;
   font-size: 80%;
+  transition: all 0.2s linear;
 `;
 
 const NotifyMsg = styled.div`
