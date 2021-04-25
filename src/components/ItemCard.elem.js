@@ -5,12 +5,12 @@ export const Card = styled.div`
   border: 0px solid #000000;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
   flex: 1 1 20rem;
-  height: ${(p) => (p.longHeight ? "12.5rem" : "11.5rem")};
+  /* height: ${(p) => (p.longHeight ? "14rem" : "13rem")}; */
   padding: 0.5rem;
   margin: 0.8rem 0.4rem;
 
   background-color: ${(p) =>
-    p.danger ? "rgb(225 134 17 / 76%)" : `${p.theme.cardBg}`};
+    p.danger ? `${p.theme.itemCardDanger}` : `${p.theme.cardBg}`};
   z-index: ${({ danger }) => (danger ? "999" : "0")};
   display: flex;
   flex-direction: row;
@@ -68,7 +68,7 @@ export const CompareTexts = styled.div`
 export const Input = styled.input`
   padding: 5px;
   margin: 3px;
-  font-size: 15px;
+  font-size: 16px;
   font-family: inherit;
   text-align: center;
   font-weight: 300;
@@ -79,7 +79,6 @@ export const Input = styled.input`
   overflow: hidden;
   width: ${({ width }) => (width ? `${width}` : "50px")};
   transition: all 0.2s linear;
-
   &:focus {
     outline: none;
   }
@@ -88,20 +87,20 @@ export const Input = styled.input`
 export const InputWrapper = styled.div`
   color: ${(p) => p.theme.text};
   font-weight: 300;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-style: italic;
 `;
 
 export const SmallButton = styled.button`
   color: ${(p) => p.theme.smBtnText};
   font-size: 20px;
-  height: 30px;
-  width: 30px;
+  height: 37px;
+  width: 37px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 15px;
+  border-radius: 50%;
   background: ${(p) =>
     p.checked ? `${p.theme.smBtnCheckedBg}` : `${p.theme.smBtnBg}`};
   outline: none;

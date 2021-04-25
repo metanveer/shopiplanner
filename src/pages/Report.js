@@ -3,6 +3,7 @@ import { AiOutlineRollback } from "react-icons/ai";
 import { ShoppingListContext } from "../contexts/ShoppingListContext";
 import { CenterButton, Button, StyledLink } from "../GlobalStyles";
 import styled from "styled-components";
+import decimalWithCommas from "../utils/utils";
 
 const Report = () => {
   const { shoppingListItems, allItemsPriceAct } = useContext(
@@ -20,8 +21,8 @@ const Report = () => {
               item.isPurchased ? (
                 <ItemsList key={item.id}>
                   <strong>{item.name}</strong> : {item.quantity} {item.unit} at
-                  Tk. {item.priceActual}/{item.unit}. Total Tk.{" "}
-                  {item.priceActual * item.quantity}
+                  Tk. {decimalWithCommas(item.priceActual)}/{item.unit}. Total
+                  Tk. {decimalWithCommas(item.priceActual * item.quantity)}
                 </ItemsList>
               ) : (
                 <ItemsList key={item.id}>
@@ -31,7 +32,9 @@ const Report = () => {
             )}
           </ol>
         </ItemsListContainer>
-        <strong>Grand total cost: Tk. {allItemsPriceAct}</strong>
+        <strong>
+          Grand total cost: Tk. {decimalWithCommas(allItemsPriceAct)}
+        </strong>
       </ReportCard>
       <CenterButton>
         <Button>
@@ -66,15 +69,16 @@ const ItemsListContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  font-size: 1.6rem;
 `;
 const DateTimeText = styled.p`
   font-weight: 300;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-style: italic;
 `;
 const HeadingText = styled.p`
   font-weight: 700;
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   margin-bottom: 5px;
 `;
 const ItemsList = styled.li`
