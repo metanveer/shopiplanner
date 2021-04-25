@@ -12,7 +12,6 @@ export const getItemsCounts = (shoppingListItems) => {
     (total, currItem) => total + currItem.priceEstimated * currItem.quantity,
     0
   );
-
   let allItemsPriceAct = shoppingListItems.reduce(
     (total, currItem) => total + currItem.priceActual * currItem.quantity,
     0

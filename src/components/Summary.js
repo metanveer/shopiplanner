@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { ShoppingListContext } from "../contexts/ShoppingListContext";
 import styled from "styled-components";
+import decimalWithCommas from "../utils/utils";
 
 const Summary = () => {
   const {
@@ -24,7 +25,7 @@ const Summary = () => {
         {allItemsPriceAct > 0 ? (
           <Card danger={dangerStyle}>
             <p>Act. cost (Tk)</p>
-            <h1>{allItemsPriceAct}</h1>
+            <h1>{decimalWithCommas(allItemsPriceAct)}</h1>
           </Card>
         ) : (
           <Card>
@@ -34,7 +35,7 @@ const Summary = () => {
         )}
         <Card>
           <p>Est. cost (Tk)</p>
-          <h1>{allItemsPriceEst}</h1>
+          <h1>{decimalWithCommas(allItemsPriceEst)}</h1>
         </Card>
       </Column>
     </Wrapper>
@@ -81,6 +82,7 @@ const NotifyMsg = styled.div`
   font-style: italic;
   font-size: 14px;
   color: ${(p) => p.theme.text};
+  padding-bottom: 6px;
 `;
 
 export default Summary;
