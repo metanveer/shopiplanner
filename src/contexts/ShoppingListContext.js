@@ -49,6 +49,12 @@ const ShoppingListContextProvider = ({ children }) => {
       payload: { changedUnit, id },
     });
   };
+  const setItemDisc = (changedDisc, id) => {
+    dispatch({
+      type: "CHANGE_DISC",
+      payload: { changedDisc, id },
+    });
+  };
 
   const setItemIsPurchased = (value, id) => {
     dispatch({
@@ -84,6 +90,7 @@ const ShoppingListContextProvider = ({ children }) => {
     setItemPriceEst,
     setItemPriceAct,
     setItemQty,
+    setItemDisc,
     setItemUnit,
     setItemIsPurchased,
     clearShoppingList,

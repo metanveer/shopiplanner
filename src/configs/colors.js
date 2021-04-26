@@ -26,7 +26,7 @@ export const dark = {
   cardBg: "#222222",
   text: "#E3E3E3",
   textLight: "#000",
-  inputBorder: "#222222",
+  inputBorder: "#444",
   smBtnText: "#eee",
   smBtnBg: "#383838",
   smBtnHoverBg: "##434343",

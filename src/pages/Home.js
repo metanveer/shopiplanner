@@ -19,6 +19,7 @@ function Home() {
     priceEstimated: "",
     priceActual: "",
     quantity: "",
+    disc: 0,
     unit: "",
     isPurchased: false,
   };

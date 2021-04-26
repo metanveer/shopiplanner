@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   AiOutlineCheck,
   AiOutlinePlus,
@@ -13,7 +13,11 @@ import {
   RightColumnOne,
   RightColumnTwo,
   ContentGroup,
+  ContentGroupHor,
+  ContentGroupHorIns,
+  ContentGroupHorInsWrap,
   Input,
+  Label,
   SmallButton,
   CompareTexts,
   LeftButtonsContainer,
@@ -26,8 +30,8 @@ const ItemCard = ({
   priceEstimated,
   priceActual,
   quantity,
+  disc,
   isPurchased,
-
   unit,
 }) => {
   const {
@@ -36,13 +40,17 @@ const ItemCard = ({
     setItemPriceEst,
     setItemPriceAct,
     setItemUnit,
+    setItemDisc,
     setItemIsPurchased,
     removeItem,
   } = useContext(ShoppingListContext);
 
   function buttonCheckedHandler() {
     if (!isPurchased) {
-      setItemPriceAct(priceEstimated, id);
+      setItemPriceAct(
+        disc ? discountedPrice(priceEstimated, disc) : priceEstimated,
+        id
+      );
       setItemIsPurchased(true, id);
     }
 
@@ -50,6 +58,23 @@ const ItemCard = ({
       setItemPriceAct(null, id);
       setItemIsPurchased(false, id);
     }
+  }
+
+  function handleDiscount(e) {
+    setItemDisc(e.target.value, id);
+  }
+
+  useEffect(() => {
+    setItemPriceAct(
+      disc ? discountedPrice(priceEstimated, disc) : priceEstimated,
+      id
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [disc, priceEstimated, id]);
+
+  function discountedPrice(price, disc) {
+    const discountedPrice = price * 1 - (price * Number(disc) * 1) / 100;
+    return discountedPrice;
   }
 
   const modifier = priceActual > priceEstimated ? "danger" : null;
@@ -60,7 +85,6 @@ const ItemCard = ({
         <SmallButton checked={isPurchased} onClick={buttonCheckedHandler}>
           <AiOutlineCheck />
         </SmallButton>
-
         <SmallButton onClick={() => removeItem(id)}>
           <AiOutlineDelete />
         </SmallButton>
@@ -69,90 +93,110 @@ const ItemCard = ({
         <RightColumnOne>
           <ContentGroup>
             <Input
-              width="135px"
+              width="120px"
               type="text"
               placeholder="Item name"
               value={name}
               maxLength="17"
               onChange={(e) => setItemName(e.target.value, id)}
             />
-            <InputWrapper>
-              Unit
-              <Input
-                width="60px"
-                type="text"
-                placeholder="Unit"
-                value={unit}
-                maxLength="12"
-                onChange={(e) => setItemUnit(e.target.value, id)}
-              />
-            </InputWrapper>
-            <InputWrapper>
-              Tk.
-              <Input
-                width="50px"
-                type="number"
-                min={0}
-                max={99999}
-                placeholder="Est. price"
-                value={priceEstimated}
-                onChange={(e) => setItemPriceEst(e.target.value, id)}
-              />{" "}
-              per {unit ? unit : "unit"}
-            </InputWrapper>
-          </ContentGroup>
-          <ContentGroup>
-            <SmallButton
-              onClick={() => setItemQty((quantity = quantity * 1 + 1), id)}
-            >
-              <AiOutlinePlus />
-            </SmallButton>
+
             <Input
-              width="50px"
-              type="number"
-              placeholder="Qty"
-              min={0}
-              max={99}
-              value={quantity}
-              onChange={(e) => setItemQty(e.target.value, id)}
+              width="120px"
+              type="text"
+              placeholder="Unit"
+              value={unit}
+              maxLength="12"
+              onChange={(e) => setItemUnit(e.target.value, id)}
             />
 
-            <SmallButton
-              onClick={() => setItemQty((quantity = quantity * 1 - 1), id)}
-            >
-              <AiOutlineMinus />
-            </SmallButton>
+            <Input
+              width="120px"
+              type="number"
+              min={0}
+              max={99999}
+              placeholder="Est. price"
+              value={priceEstimated}
+              onChange={(e) => setItemPriceEst(e.target.value, id)}
+            />
           </ContentGroup>
-          <ContentGroup>
-            {isPurchased && (
-              <>
-                <SmallButton
-                  onClick={() =>
-                    setItemPriceAct((priceActual = priceActual * 1 + 1), id)
-                  }
-                >
-                  <AiOutlinePlus />
-                </SmallButton>
-
+          <div>
+            <ContentGroupHor>
+              <SmallButton
+                onClick={() => setItemQty((quantity = quantity * 1 + 1), id)}
+              >
+                <AiOutlinePlus />
+              </SmallButton>
+              <InputWrapper
+                style={{ display: "flex", flexDirection: "column" }}
+              >
+                <Label>Qty</Label>
                 <Input
-                  width="50px"
+                  width="30px"
                   type="number"
+                  placeholder="Qty"
                   min={0}
-                  max={99999}
-                  placeholder="Act. price"
-                  value={priceActual}
-                  onChange={(e) => setItemPriceAct(e.target.value, id)}
+                  max={99}
+                  value={quantity}
+                  onChange={(e) => setItemQty(e.target.value, id)}
                 />
-                <SmallButton
-                  onClick={() =>
-                    setItemPriceAct((priceActual = priceActual * 1 - 1), id)
-                  }
-                >
-                  <AiOutlineMinus />
-                </SmallButton>
-              </>
+              </InputWrapper>
+              <SmallButton
+                onClick={() => setItemQty((quantity = quantity * 1 - 1), id)}
+              >
+                <AiOutlineMinus />
+              </SmallButton>
+            </ContentGroupHor>
+
+            {isPurchased && (
+              <ContentGroupHorInsWrap>
+                <ContentGroupHorIns>
+                  <InputWrapper>
+                    Disc
+                    <Input
+                      width="30px"
+                      type="number"
+                      placeholder="Disc"
+                      min={0}
+                      max={99}
+                      value={disc}
+                      onChange={handleDiscount}
+                    />
+                    %
+                  </InputWrapper>
+                </ContentGroupHorIns>
+                <ContentGroupHorIns>
+                  <SmallButton
+                    onClick={() =>
+                      setItemPriceAct((priceActual = priceActual * 1 + 1), id)
+                    }
+                  >
+                    <AiOutlinePlus />
+                  </SmallButton>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <Label>Act. Tk.</Label>
+                    <Input
+                      width="50px"
+                      name="actualPrice"
+                      type="number"
+                      min={0}
+                      max={99999}
+                      placeholder="Act. price"
+                      value={priceActual}
+                      onChange={(e) => setItemPriceAct(e.target.value, id)}
+                    />
+                  </div>
+                  <SmallButton
+                    onClick={() =>
+                      setItemPriceAct((priceActual = priceActual * 1 - 1), id)
+                    }
+                  >
+                    <AiOutlineMinus />
+                  </SmallButton>
+                </ContentGroupHorIns>
+              </ContentGroupHorInsWrap>
             )}
-          </ContentGroup>
+          </div>
         </RightColumnOne>
         <RightColumnTwo>
           <CompareTexts>

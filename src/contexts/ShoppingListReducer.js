@@ -97,6 +97,7 @@ export const ShoppingListReducer = (state, action) => {
       const indexPriceAct = state.shoppingListItems.findIndex(
         (item) => item.id === action.payload.id
       );
+
       if (
         action.payload.updatedPriceAct >= 0 &&
         action.payload.updatedPriceAct <= 9999
@@ -146,6 +147,33 @@ export const ShoppingListReducer = (state, action) => {
           ...getItemsCounts(state.shoppingListItems),
           shoppingListItems: [...state.shoppingListItems],
           message: "Maximum allowed qauntity reached!",
+        };
+      }
+      return {
+        ...state,
+        ...getItemsCounts(state.shoppingListItems),
+        shoppingListItems: [...state.shoppingListItems],
+        message: "You know, this doesn't make sense!",
+      };
+    case "CHANGE_DISC":
+      const indexDisc = state.shoppingListItems.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      if (action.payload.changedDisc >= 0 && action.payload.changedDisc <= 99) {
+        state.shoppingListItems[indexDisc].disc = action.payload.changedDisc;
+        return {
+          ...state,
+          ...getItemsCounts(state.shoppingListItems),
+          shoppingListItems: [...state.shoppingListItems],
+          message: "Discount updated",
+        };
+      }
+      if (action.payload.changedQty >= 99) {
+        return {
+          ...state,
+          ...getItemsCounts(state.shoppingListItems),
+          shoppingListItems: [...state.shoppingListItems],
+          message: "Doesn't make sense!",
         };
       }
       return {

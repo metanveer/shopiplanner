@@ -52,7 +52,41 @@ export const ContentGroup = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
+  border: 1px solid ${(p) => p.theme.inputBorder};
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 7px 7px;
+`;
+export const ContentGroupHor = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
+  border: 1px solid ${(p) => p.theme.inputBorder};
+  border-radius: 5px;
+  margin-bottom: 5px;
+  padding: 2px;
+`;
+export const ContentGroupHorIns = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid ${(p) => p.theme.inputBorder};
+  border-radius: 5px;
+  margin-bottom: 5px;
+  padding: 2px; */
+`;
+export const ContentGroupHorInsWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid ${(p) => p.theme.inputBorder};
+  border-radius: 5px;
+  margin-bottom: 5px;
+  padding: 2px;
 `;
 
 export const CompareTexts = styled.div`
@@ -72,13 +106,22 @@ export const Input = styled.input`
   font-family: inherit;
   text-align: center;
   font-weight: 300;
-  background-color: ${(p) => p.theme.bg};
+  background-color: ${(p) => p.theme.cardBg};
   color: ${(p) => p.theme.text};
-  border-radius: 5px;
-  border: 1px solid ${(p) => p.theme.inputBorder};
+  /* border-radius: 5px; */
+  border: hidden;
+  border-bottom: 1px solid ${(p) => p.theme.inputBorder};
   overflow: hidden;
   width: ${({ width }) => (width ? `${width}` : "50px")};
   transition: all 0.2s linear;
+  -moz-appearance: textfield;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+
   &:focus {
     outline: none;
   }
@@ -89,6 +132,13 @@ export const InputWrapper = styled.div`
   font-weight: 300;
   font-size: 1.6rem;
   font-style: italic;
+`;
+export const Label = styled.label`
+  color: ${(p) => p.theme.text};
+  font-weight: 300;
+  font-size: 1.4rem;
+  font-style: italic;
+  margin-top: 2px;
 `;
 
 export const SmallButton = styled.button`
