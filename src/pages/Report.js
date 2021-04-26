@@ -38,7 +38,7 @@ const Report = () => {
         </label>
       </ReportCardOptions>
       <ReportCard>
-        <HeadingText>Shopping Report {`${isMedicine}`} </HeadingText>
+        <HeadingText>Shopping Report</HeadingText>
         <DateTimeText>{currentDateTime} </DateTimeText>
         <ItemsListContainer>
           {!isDetailed && (
