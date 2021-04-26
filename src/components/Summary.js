@@ -67,7 +67,7 @@ const Card = styled.div`
   margin: 0 0.4rem;
   color: ${(p) => p.theme.text};
   background-color: ${({ danger, theme }) =>
-    danger ? `${theme.danger}` : `${theme.cardBg}`};
+    danger ? `${theme.danger}` : `${theme.cardBgSummary}`};
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

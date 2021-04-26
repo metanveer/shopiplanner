@@ -108,7 +108,7 @@ export const ShoppingListReducer = (state, action) => {
           ...state,
           ...getItemsCounts(state.shoppingListItems),
           shoppingListItems: [...state.shoppingListItems],
-          message: "Actual Price Added!",
+          message: null,
         };
       }
 

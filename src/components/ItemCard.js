@@ -70,7 +70,7 @@ const ItemCard = ({
       id
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [disc, priceEstimated, id]);
+  }, [disc, priceEstimated]);
 
   function discountedPrice(price, disc) {
     const discountedPrice = price * 1 - (price * Number(disc) * 1) / 100;
