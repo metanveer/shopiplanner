@@ -38,7 +38,9 @@ const Report = () => {
         </label>
       </ReportCardOptions>
       <ReportCard>
-        <HeadingText>Shopping Report</HeadingText>
+        <HeadingText>
+          <Input type="text" placeholder="Title" width="300px" />
+        </HeadingText>
         <DateTimeText>{currentDateTime} </DateTimeText>
         <ItemsListContainer>
           {!isDetailed && (
@@ -48,12 +50,42 @@ const Report = () => {
                   <ItemsList key={item.id}>
                     <strong>{item.name}</strong> :{" "}
                     <div>
+                      <span>
+                        {item.quantity} {item.unit}{" "}
+                      </span>
+                      <span>
+                        {isMedicine ? "  |  " : ` | Budget:  `}
+                        <Text>
+                          Tk. {decimalWithCommas(item.priceEstimated)}/
+                          {item.unit}
+                        </Text>
+                      </span>
+                      {/* <div>
+                        {isMedicine ? "Discounted Price: " : ` Actual Cost:  `}
+                        <Text>
+                          Tk. {decimalWithCommas(item.priceActual)}/{item.unit}
+                        </Text>
+                      </div> */}
+
+                      <span>
+                        {isMedicine ? "  |   Total MRP" : ` | Total Budget:  `}
+                        <Text>
+                          {" "}
+                          Tk.{" "}
+                          {decimalWithCommas(
+                            item.priceEstimated * item.quantity
+                          )}{" "}
+                        </Text>
+                      </span>
                       <div>
-                        {item.quantity} {item.unit} at Tk.{" "}
-                        {decimalWithCommas(item.priceActual)}/{item.unit}
-                      </div>{" "}
-                      Total Tk.{" "}
-                      {decimalWithCommas(item.priceActual * item.quantity)}{" "}
+                        {isMedicine ? "Discounted Total: " : `Total Actual:  `}
+                        <Text>
+                          Tk.
+                          {decimalWithCommas(
+                            item.priceActual * item.quantity
+                          )}{" "}
+                        </Text>
+                      </div>
                       <div>{item.disc ? ` Disc (${item.disc}%)` : null}</div>
                     </div>
                   </ItemsList>
@@ -135,6 +167,38 @@ const Report = () => {
   );
 };
 
+const Input = styled.input`
+  padding: 5px;
+  margin: 3px;
+  font-size: 16px;
+  font-family: inherit;
+  text-align: center;
+  font-weight: 400;
+  background-color: ${(p) => p.theme.cardBg};
+  color: ${(p) => p.theme.text};
+  /* border-radius: 5px; */
+  border: hidden;
+  border-bottom: 1px solid ${(p) => p.theme.inputBorder};
+  overflow: hidden;
+  width: ${({ width }) => (width ? `${width}` : "50px")};
+  transition: all 0.2s linear;
+  -moz-appearance: textfield;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  @media print {
+    color: black;
+  }
+`;
+
 const ReportCard = styled.div`
   border-radius: 10px 10px 10px 10px;
   border: 0px solid #000000;
@@ -148,6 +212,9 @@ const ReportCard = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media print {
+    color: black;
+  }
 `;
 const ReportCardOptions = styled.div`
   border-radius: 10px 10px 10px 10px;
@@ -162,6 +229,9 @@ const ReportCardOptions = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  @media print {
+    display: none;
+  }
 `;
 const ItemsListContainer = styled.div`
   border-radius: 10px 10px 10px 10px;

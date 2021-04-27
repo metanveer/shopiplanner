@@ -18,6 +18,9 @@ const ToggleWrapper = styled.div`
   margin-bottom: 5px;
   display: flex;
   background: ${(p) => p.theme.primary};
+  @media print {
+    display: none;
+  }
 `;
 
 const Notch = styled.div`
@@ -29,6 +32,9 @@ const Notch = styled.div`
   border-radius: 50%;
   transition: all 0.2s linear;
   transform: translate(${(p) => (p.isActive ? "26px" : "1px")});
+  @media print {
+    display: none;
+  }
 `;
 
 export default Toggle;

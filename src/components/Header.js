@@ -43,6 +43,9 @@ const HeaderWrapper = styled.header`
   align-items: center;
   padding: 0 3px;
   transition: all 0.2s linear;
+  @media print {
+    color: #9320e0;
+  }
 `;
 
 const Logo = styled.p`
